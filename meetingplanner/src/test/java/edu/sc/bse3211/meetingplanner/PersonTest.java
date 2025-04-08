@@ -14,8 +14,14 @@ public class PersonTest {
 
     @Test
     public void testDefaultConstructor() {
-        Person p = new Person();
-        assertEquals("", p.getName());
+        person  = new Person();
+        assertEquals("", person.getName());
+    }
+
+
+    @Test
+    public void testParameterizedConstructor() {
+        assertEquals("Alice...", person.getName());
     }
 
 	
