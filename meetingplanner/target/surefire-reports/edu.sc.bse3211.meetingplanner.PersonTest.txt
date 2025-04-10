@@ -1,8 +1,12 @@
 -------------------------------------------------------------------------------
 Test set: edu.sc.bse3211.meetingplanner.PersonTest
 -------------------------------------------------------------------------------
-Tests run: 2, Failures: 1, Errors: 0, Skipped: 0, Time elapsed: 0.001 s <<< FAILURE! - in edu.sc.bse3211.meetingplanner.PersonTest
-testParameterizedConstructor(edu.sc.bse3211.meetingplanner.PersonTest)  Time elapsed: 0 s  <<< FAILURE!
-org.junit.ComparisonFailure: expected:<Alice[...]> but was:<Alice[]>
-	at edu.sc.bse3211.meetingplanner.PersonTest.testParameterizedConstructor(PersonTest.java:24)
+Tests run: 23, Failures: 2, Errors: 0, Skipped: 0, Time elapsed: 0.014 s <<< FAILURE! - in edu.sc.bse3211.meetingplanner.PersonTest
+testAddMeetingConflictDiagnostic(edu.sc.bse3211.meetingplanner.PersonTest)  Time elapsed: 0 s  <<< FAILURE!
+java.lang.AssertionError: Exception message should contain the person's name
+	at edu.sc.bse3211.meetingplanner.PersonTest.testAddMeetingConflictDiagnostic(PersonTest.java:185)
+
+testEmptyAgenda(edu.sc.bse3211.meetingplanner.PersonTest)  Time elapsed: 0 s  <<< FAILURE!
+java.lang.AssertionError: Empty agenda should return an empty string
+	at edu.sc.bse3211.meetingplanner.PersonTest.testEmptyAgenda(PersonTest.java:154)
 

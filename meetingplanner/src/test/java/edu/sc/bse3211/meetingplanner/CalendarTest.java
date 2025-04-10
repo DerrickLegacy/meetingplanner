@@ -66,22 +66,34 @@ public class CalendarTest {
   // 3. Test conflict detection when two meetings overlap
   @Test
   public void testAddMeeting_conflict() {
-    try {
-      Meeting meeting1 = new Meeting(4, 20, 14, 16);
-      Meeting meeting2 = new Meeting(4, 20, 15, 17);
-      calendar.addMeeting(meeting1);
-      calendar.addMeeting(meeting2); // Should throw TimeConflictException
-      fail(
-        "Expected TimeConflictException to be thrown due to overlapping meetings"
-      );
-    } catch (Exception e) {
-      System.out.println("Caught exception: " + e.getClass().getSimpleName());
-      assertTrue(
-        "Expected a TimeConflictException",
-        e instanceof TimeConflictException
-      );
-    }
+	  try {
+		  // Create two overlapping meetings
+		  Meeting meeting1 = new Meeting(4, 20, 14, 16);  // 14:00 - 16:00
+		  Meeting meeting2 = new Meeting(4, 20, 15, 17);  // 15:00 - 17:00 (overlaps with meeting1)
+  
+		  // Add the first meeting
+		  calendar.addMeeting(meeting1);
+		  
+		  // Add the second meeting and expect an exception
+		  calendar.addMeeting(meeting2); // Should throw TimeConflictException
+		  
+		  // Fail the test if no exception is thrown
+		  fail("Expected TimeConflictException to be thrown due to overlapping meetings");
+		  
+	  } catch (TimeConflictException e) {
+		  // Expected outcome: TimeConflictException is thrown
+		  System.out.println("Caught TimeConflictException as expected: " + e.getMessage());
+		  
+		  // Optional: Add more checks on the exception message if necessary
+		  assertTrue("Exception message should contain 'overlap' or 'conflict'",
+					 e.getMessage().contains("overlap") || e.getMessage().contains("conflict"));
+	  } catch (Exception e) {
+		  // Catch any other exceptions and fail the test with an error message
+		  fail("Unexpected exception was thrown: " + e.getClass().getSimpleName());
+	  }
   }
+  
+  
 
   // 4. Test clearing the schedule for a specific day
   @Test

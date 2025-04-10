@@ -1,0 +1,16 @@
+-------------------------------------------------------------------------------
+Test set: edu.sc.bse3211.meetingplanner.MeetingTest
+-------------------------------------------------------------------------------
+Tests run: 15, Failures: 3, Errors: 0, Skipped: 0, Time elapsed: 0.003 s <<< FAILURE! - in edu.sc.bse3211.meetingplanner.MeetingTest
+testToStringWithNullValues(edu.sc.bse3211.meetingplanner.MeetingTest)  Time elapsed: 0 s  <<< FAILURE!
+java.lang.AssertionError: toString() threw NullPointerException when handling null values: Cannot invoke "edu.sc.bse3211.meetingplanner.Room.getID()" because "this.room" is null
+	at edu.sc.bse3211.meetingplanner.MeetingTest.testToStringWithNullValues(MeetingTest.java:157)
+
+testEmptyMeeting(edu.sc.bse3211.meetingplanner.MeetingTest)  Time elapsed: 0.001 s  <<< FAILURE!
+java.lang.AssertionError: Attendees list should be initialized
+	at edu.sc.bse3211.meetingplanner.MeetingTest.testEmptyMeeting(MeetingTest.java:204)
+
+testDefaultConstructor(edu.sc.bse3211.meetingplanner.MeetingTest)  Time elapsed: 0 s  <<< FAILURE!
+java.lang.AssertionError: Default attendees list should not be null
+	at edu.sc.bse3211.meetingplanner.MeetingTest.testDefaultConstructor(MeetingTest.java:39)
+

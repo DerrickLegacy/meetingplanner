@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report.xsd" name="edu.sc.bse3211.meetingplanner.CalendarTest" time="0.102" tests="16" errors="0" skipped="0" failures="2">
+<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report.xsd" name="edu.sc.bse3211.meetingplanner.RoomTest" time="0.022" tests="21" errors="0" skipped="0" failures="6">
   <properties>
     <property name="java.specification.version" value="19"/>
     <property name="sun.cpu.isalist" value="amd64"/>
@@ -59,27 +59,49 @@
     <property name="sun.io.unicode.encoding" value="UnicodeLittle"/>
     <property name="java.class.version" value="63.0"/>
   </properties>
-  <testcase name="testInvalidDateAgain" classname="edu.sc.bse3211.meetingplanner.CalendarTest" time="0.014">
-    <failure message="Expected exception: edu.sc.bse3211.meetingplanner.TimeConflictException" type="java.lang.AssertionError">java.lang.AssertionError: Expected exception: edu.sc.bse3211.meetingplanner.TimeConflictException
+  <testcase name="testRemoveNonExistentMeeting" classname="edu.sc.bse3211.meetingplanner.RoomTest" time="0.001"/>
+  <testcase name="testLastDayOfMonthMeeting" classname="edu.sc.bse3211.meetingplanner.RoomTest" time="0"/>
+  <testcase name="testInvalidMeetingParameters" classname="edu.sc.bse3211.meetingplanner.RoomTest" time="0"/>
+  <testcase name="testMidnightMeeting" classname="edu.sc.bse3211.meetingplanner.RoomTest" time="0"/>
+  <testcase name="testPrintAgendaMonth" classname="edu.sc.bse3211.meetingplanner.RoomTest" time="0">
+    <failure message="Agenda should indicate no meetings if no meetings are scheduled" type="java.lang.AssertionError">java.lang.AssertionError: Agenda should indicate no meetings if no meetings are scheduled
+	at edu.sc.bse3211.meetingplanner.RoomTest.testPrintAgendaMonth(RoomTest.java:78)
 </failure>
   </testcase>
-  <testcase name="testInvalidTimeAgain" classname="edu.sc.bse3211.meetingplanner.CalendarTest" time="0"/>
-  <testcase name="testAddMeeting_conflict" classname="edu.sc.bse3211.meetingplanner.CalendarTest" time="0.002">
-    <failure message="Unexpected exception was thrown: NullPointerException" type="java.lang.AssertionError">java.lang.AssertionError: Unexpected exception was thrown: NullPointerException
-	at edu.sc.bse3211.meetingplanner.CalendarTest.testAddMeeting_conflict(CalendarTest.java:92)
+  <testcase name="testPrintAgendaDay" classname="edu.sc.bse3211.meetingplanner.RoomTest" time="0">
+    <failure message="Agenda should indicate no meetings if no meetings are scheduled" type="java.lang.AssertionError">java.lang.AssertionError: Agenda should indicate no meetings if no meetings are scheduled
+	at edu.sc.bse3211.meetingplanner.RoomTest.testPrintAgendaDay(RoomTest.java:89)
 </failure>
   </testcase>
-  <testcase name="testPrintAgendaMonth" classname="edu.sc.bse3211.meetingplanner.CalendarTest" time="0.002"/>
-  <testcase name="testMultipleMeetingsSameDay" classname="edu.sc.bse3211.meetingplanner.CalendarTest" time="0.001"/>
-  <testcase name="testInvalidDate" classname="edu.sc.bse3211.meetingplanner.CalendarTest" time="0.001"/>
-  <testcase name="testInvalidTime" classname="edu.sc.bse3211.meetingplanner.CalendarTest" time="0.001"/>
-  <testcase name="testPrintAgendaDay" classname="edu.sc.bse3211.meetingplanner.CalendarTest" time="0.002"/>
-  <testcase name="testMeetingRemoval" classname="edu.sc.bse3211.meetingplanner.CalendarTest" time="0"/>
-  <testcase name="testClearScheduleAgain" classname="edu.sc.bse3211.meetingplanner.CalendarTest" time="0.001"/>
-  <testcase name="testVacationBlocksInCalendar" classname="edu.sc.bse3211.meetingplanner.CalendarTest" time="0.001"/>
-  <testcase name="testAddMeeting_holiday" classname="edu.sc.bse3211.meetingplanner.CalendarTest" time="0.001"/>
-  <testcase name="testAddMeeting_normalMeeting" classname="edu.sc.bse3211.meetingplanner.CalendarTest" time="0.001"/>
-  <testcase name="testClearSchedule" classname="edu.sc.bse3211.meetingplanner.CalendarTest" time="0.001"/>
-  <testcase name="testGetAndRemoveMeeting" classname="edu.sc.bse3211.meetingplanner.CalendarTest" time="0.001"/>
-  <testcase name="testGetMeeting" classname="edu.sc.bse3211.meetingplanner.CalendarTest" time="0.001"/>
+  <testcase name="testPartialOverlapMeeting" classname="edu.sc.bse3211.meetingplanner.RoomTest" time="0.001">
+    <failure message="Unexpected exception: NullPointerException" type="java.lang.AssertionError">java.lang.AssertionError: Unexpected exception: NullPointerException
+	at edu.sc.bse3211.meetingplanner.RoomTest.testPartialOverlapMeeting(RoomTest.java:211)
+</failure>
+  </testcase>
+  <testcase name="testIsBusyWithMeeting" classname="edu.sc.bse3211.meetingplanner.RoomTest" time="0.001"/>
+  <testcase name="testRemoveMeeting" classname="edu.sc.bse3211.meetingplanner.RoomTest" time="0"/>
+  <testcase name="testConstructorWithID" classname="edu.sc.bse3211.meetingplanner.RoomTest" time="0.005"/>
+  <testcase name="testGetNonExistentMeeting" classname="edu.sc.bse3211.meetingplanner.RoomTest" time="0.002">
+    <failure message="Unexpected IndexOutOfBoundsException: Index 0 out of bounds for length 0" type="java.lang.AssertionError">java.lang.AssertionError: Unexpected IndexOutOfBoundsException: Index 0 out of bounds for length 0
+	at edu.sc.bse3211.meetingplanner.RoomTest.testGetNonExistentMeeting(RoomTest.java:169)
+</failure>
+  </testcase>
+  <testcase name="testEndOfDayMeeting" classname="edu.sc.bse3211.meetingplanner.RoomTest" time="0.006">
+    <failure message="TimeConflictException should not be thrown for end of day meeting." type="java.lang.AssertionError">java.lang.AssertionError: TimeConflictException should not be thrown for end of day meeting.
+	at edu.sc.bse3211.meetingplanner.RoomTest.testEndOfDayMeeting(RoomTest.java:126)
+</failure>
+  </testcase>
+  <testcase name="testSameDayDifferentMonths" classname="edu.sc.bse3211.meetingplanner.RoomTest" time="0"/>
+  <testcase name="testIsBusyNoMeetings" classname="edu.sc.bse3211.meetingplanner.RoomTest" time="0"/>
+  <testcase name="testGetMeeting" classname="edu.sc.bse3211.meetingplanner.RoomTest" time="0"/>
+  <testcase name="testFirstDayOfMonthMeeting" classname="edu.sc.bse3211.meetingplanner.RoomTest" time="0"/>
+  <testcase name="testMultipleMeetingsDifferentDays" classname="edu.sc.bse3211.meetingplanner.RoomTest" time="0"/>
+  <testcase name="testExactSameTimeMeeting" classname="edu.sc.bse3211.meetingplanner.RoomTest" time="0">
+    <failure message="Unexpected exception: java.lang.NullPointerException" type="java.lang.AssertionError">java.lang.AssertionError: Unexpected exception: java.lang.NullPointerException
+	at edu.sc.bse3211.meetingplanner.RoomTest.testExactSameTimeMeeting(RoomTest.java:230)
+</failure>
+  </testcase>
+  <testcase name="testAddValidMeeting" classname="edu.sc.bse3211.meetingplanner.RoomTest" time="0"/>
+  <testcase name="testDefaultConstructor" classname="edu.sc.bse3211.meetingplanner.RoomTest" time="0"/>
+  <testcase name="testSameTimeDifferentDays" classname="edu.sc.bse3211.meetingplanner.RoomTest" time="0"/>
 </testsuite>

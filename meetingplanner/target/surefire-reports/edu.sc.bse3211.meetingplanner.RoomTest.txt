@@ -1,0 +1,28 @@
+-------------------------------------------------------------------------------
+Test set: edu.sc.bse3211.meetingplanner.RoomTest
+-------------------------------------------------------------------------------
+Tests run: 21, Failures: 6, Errors: 0, Skipped: 0, Time elapsed: 0.022 s <<< FAILURE! - in edu.sc.bse3211.meetingplanner.RoomTest
+testPrintAgendaMonth(edu.sc.bse3211.meetingplanner.RoomTest)  Time elapsed: 0 s  <<< FAILURE!
+java.lang.AssertionError: Agenda should indicate no meetings if no meetings are scheduled
+	at edu.sc.bse3211.meetingplanner.RoomTest.testPrintAgendaMonth(RoomTest.java:78)
+
+testPrintAgendaDay(edu.sc.bse3211.meetingplanner.RoomTest)  Time elapsed: 0 s  <<< FAILURE!
+java.lang.AssertionError: Agenda should indicate no meetings if no meetings are scheduled
+	at edu.sc.bse3211.meetingplanner.RoomTest.testPrintAgendaDay(RoomTest.java:89)
+
+testPartialOverlapMeeting(edu.sc.bse3211.meetingplanner.RoomTest)  Time elapsed: 0.001 s  <<< FAILURE!
+java.lang.AssertionError: Unexpected exception: NullPointerException
+	at edu.sc.bse3211.meetingplanner.RoomTest.testPartialOverlapMeeting(RoomTest.java:211)
+
+testGetNonExistentMeeting(edu.sc.bse3211.meetingplanner.RoomTest)  Time elapsed: 0.002 s  <<< FAILURE!
+java.lang.AssertionError: Unexpected IndexOutOfBoundsException: Index 0 out of bounds for length 0
+	at edu.sc.bse3211.meetingplanner.RoomTest.testGetNonExistentMeeting(RoomTest.java:169)
+
+testEndOfDayMeeting(edu.sc.bse3211.meetingplanner.RoomTest)  Time elapsed: 0.006 s  <<< FAILURE!
+java.lang.AssertionError: TimeConflictException should not be thrown for end of day meeting.
+	at edu.sc.bse3211.meetingplanner.RoomTest.testEndOfDayMeeting(RoomTest.java:126)
+
+testExactSameTimeMeeting(edu.sc.bse3211.meetingplanner.RoomTest)  Time elapsed: 0 s  <<< FAILURE!
+java.lang.AssertionError: Unexpected exception: java.lang.NullPointerException
+	at edu.sc.bse3211.meetingplanner.RoomTest.testExactSameTimeMeeting(RoomTest.java:230)
+
