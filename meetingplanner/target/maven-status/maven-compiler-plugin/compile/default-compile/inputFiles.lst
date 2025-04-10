@@ -1,7 +1,7 @@
-/home/derrick-legacy/Desktop/Software Testing Assignment/meetingplanner/meetingplanner/src/main/java/edu/sc/bse3211/meetingplanner/TimeConflictException.java
-/home/derrick-legacy/Desktop/Software Testing Assignment/meetingplanner/meetingplanner/src/main/java/edu/sc/bse3211/meetingplanner/Organization.java
-/home/derrick-legacy/Desktop/Software Testing Assignment/meetingplanner/meetingplanner/src/main/java/edu/sc/bse3211/meetingplanner/Person.java
-/home/derrick-legacy/Desktop/Software Testing Assignment/meetingplanner/meetingplanner/src/main/java/edu/sc/bse3211/meetingplanner/Meeting.java
-/home/derrick-legacy/Desktop/Software Testing Assignment/meetingplanner/meetingplanner/src/main/java/edu/sc/bse3211/meetingplanner/Room.java
-/home/derrick-legacy/Desktop/Software Testing Assignment/meetingplanner/meetingplanner/src/main/java/edu/sc/bse3211/meetingplanner/PlannerInterface.java
-/home/derrick-legacy/Desktop/Software Testing Assignment/meetingplanner/meetingplanner/src/main/java/edu/sc/bse3211/meetingplanner/Calendar.java
+/home/micheal/Documents/Notes/meetingplanner/meetingplanner/src/main/java/edu/sc/bse3211/meetingplanner/PlannerInterface.java
+/home/micheal/Documents/Notes/meetingplanner/meetingplanner/src/main/java/edu/sc/bse3211/meetingplanner/Meeting.java
+/home/micheal/Documents/Notes/meetingplanner/meetingplanner/src/main/java/edu/sc/bse3211/meetingplanner/Person.java
+/home/micheal/Documents/Notes/meetingplanner/meetingplanner/src/main/java/edu/sc/bse3211/meetingplanner/Organization.java
+/home/micheal/Documents/Notes/meetingplanner/meetingplanner/src/main/java/edu/sc/bse3211/meetingplanner/TimeConflictException.java
+/home/micheal/Documents/Notes/meetingplanner/meetingplanner/src/main/java/edu/sc/bse3211/meetingplanner/Room.java
+/home/micheal/Documents/Notes/meetingplanner/meetingplanner/src/main/java/edu/sc/bse3211/meetingplanner/Calendar.java

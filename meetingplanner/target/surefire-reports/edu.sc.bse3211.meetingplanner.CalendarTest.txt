@@ -1,4 +1,8 @@
 -------------------------------------------------------------------------------
 Test set: edu.sc.bse3211.meetingplanner.CalendarTest
 -------------------------------------------------------------------------------
-Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.026 s - in edu.sc.bse3211.meetingplanner.CalendarTest
+Tests run: 8, Failures: 0, Errors: 1, Skipped: 0, Time elapsed: 0.069 s <<< FAILURE! - in edu.sc.bse3211.meetingplanner.CalendarTest
+testAddMeeting_conflict(edu.sc.bse3211.meetingplanner.CalendarTest)  Time elapsed: 0.011 s  <<< ERROR!
+java.lang.Exception: Unexpected exception, expected<edu.sc.bse3211.meetingplanner.TimeConflictException> but was<java.lang.NullPointerException>
+	at edu.sc.bse3211.meetingplanner.CalendarTest.testAddMeeting_conflict(CalendarTest.java:49)
+
