@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report.xsd" name="edu.sc.bse3211.meetingplanner.CalendarTest" time="0.023" tests="1" errors="0" skipped="0" failures="0">
+<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report.xsd" name="edu.sc.bse3211.meetingplanner.CalendarTest" time="0.067" tests="1" errors="1" skipped="0" failures="0">
   <properties>
     <property name="java.specification.version" value="24"/>
     <property name="sun.jnu.encoding" value="UTF-8"/>
@@ -12,7 +12,7 @@
     <property name="sun.java.launcher" value="SUN_STANDARD"/>
     <property name="user.country" value="US"/>
     <property name="sun.boot.library.path" value="/opt/jdk-24/lib"/>
-    <property name="sun.java.command" value="/home/derrick-legacy/Desktop/Software Testing Assignment/meetingplanner/meetingplanner/target/surefire/surefirebooter15569639327448693862.jar /home/derrick-legacy/Desktop/Software Testing Assignment/meetingplanner/meetingplanner/target/surefire 2025-04-08T16-51-20_802-jvmRun1 surefire8424717752167330384tmp surefire_07377908967774801939tmp"/>
+    <property name="sun.java.command" value="/home/derrick-legacy/Desktop/Software Testing Assignment/meetingplanner/meetingplanner/target/surefire/surefirebooter6797354587197203790.jar /home/derrick-legacy/Desktop/Software Testing Assignment/meetingplanner/meetingplanner/target/surefire 2025-04-10T14-46-10_665-jvmRun1 surefire17406809702622495954tmp surefire_04189306633918583672tmp"/>
     <property name="jdk.debug" value="release"/>
     <property name="surefire.test.class.path" value="/home/derrick-legacy/Desktop/Software Testing Assignment/meetingplanner/meetingplanner/target/test-classes:/home/derrick-legacy/Desktop/Software Testing Assignment/meetingplanner/meetingplanner/target/classes:/home/derrick-legacy/.m2/repository/junit/junit/4.11/junit-4.11.jar:/home/derrick-legacy/.m2/repository/org/hamcrest/hamcrest-core/1.3/hamcrest-core-1.3.jar:"/>
     <property name="sun.cpu.endian" value="little"/>
@@ -27,7 +27,7 @@
     <property name="line.separator" value="&#10;"/>
     <property name="java.specification.name" value="Java Platform API Specification"/>
     <property name="java.vm.specification.vendor" value="Oracle Corporation"/>
-    <property name="surefire.real.class.path" value="/home/derrick-legacy/Desktop/Software Testing Assignment/meetingplanner/meetingplanner/target/surefire/surefirebooter15569639327448693862.jar"/>
+    <property name="surefire.real.class.path" value="/home/derrick-legacy/Desktop/Software Testing Assignment/meetingplanner/meetingplanner/target/surefire/surefirebooter6797354587197203790.jar"/>
     <property name="sun.management.compiler" value="HotSpot 64-Bit Tiered Compilers"/>
     <property name="java.runtime.version" value="24+36-3646"/>
     <property name="user.name" value="derrick-legacy"/>
@@ -53,5 +53,14 @@
     <property name="sun.io.unicode.encoding" value="UnicodeLittle"/>
     <property name="java.class.version" value="68.0"/>
   </properties>
-  <testcase name="testAddMeeting_holiday" classname="edu.sc.bse3211.meetingplanner.CalendarTest" time="0.004"/>
+  <testcase name="testAddMeeting_holiday" classname="edu.sc.bse3211.meetingplanner.CalendarTest" time="0.015">
+    <error message="Unresolved compilation problems: &#10;	The method addMeeting(Meeting) from the type Calendar refers to the missing type TimeConflictException&#10;	The method isBusy(int, int, int, int) from the type Calendar refers to the missing type TimeConflictException&#10;	TimeConflictException cannot be resolved to a type&#10;" type="java.lang.Error">java.lang.Error: 
+Unresolved compilation problems: 
+	The method addMeeting(Meeting) from the type Calendar refers to the missing type TimeConflictException
+	The method isBusy(int, int, int, int) from the type Calendar refers to the missing type TimeConflictException
+	TimeConflictException cannot be resolved to a type
+
+	at edu.sc.bse3211.meetingplanner.CalendarTest.testAddMeeting_holiday(CalendarTest.java:18)
+</error>
+  </testcase>
 </testsuite>

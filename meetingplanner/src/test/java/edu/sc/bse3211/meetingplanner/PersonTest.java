@@ -1,66 +1,161 @@
 package edu.sc.bse3211.meetingplanner;
 
-import org.junit.Before;
-import org.junit.Test;
 import static org.junit.Assert.*;
-
+import org.junit.Test;
+import org.junit.Before;
 import java.util.ArrayList;
 import java.util.Arrays;
 
 public class PersonTest {
     private Person person;
+    private Meeting meeting;
+    private Room room;
 
     @Before
     public void setUp() {
-        person = new Person("Alice");
+        person = new Person("Test Person");
+        room = new Room("Test Room");
+        ArrayList<Person> attendees = new ArrayList<Person>();
+        attendees.add(person);
+        meeting = new Meeting(5, 15, 9, 11, attendees, room, "Test Meeting");
     }
 
-    /**
-     * Test Case: P1
-     * Test Default Constructor
-     * 
-     * @param name - The name of the person.
-     * 
-     *             public Person(String name) {
-     *             this.name = name;
-     *             calendar = new Calendar();
-     *             }
-     */
     @Test
     public void testDefaultConstructor() {
-        person = new Person();
-        assertEquals("", person.getName());
+        Person defaultPerson = new Person();
+        assertEquals("Default constructor should initialize name to empty string", "", defaultPerson.getName());
     }
 
     @Test
-    public void testParameterizedConstructor() {
-        assertEquals("Alice", person.getName());
+    public void testConstructorWithName() {
+        Person namedPerson = new Person("John Doe");
+        assertEquals("Constructor should set name to the provided value", "John Doe", namedPerson.getName());
     }
 
-    /**
-     * Test Case: P2
-     * Tests Adding a meeting to a calendar.
-     * 
-     * @param month       - The month of the meeting (1-12).
-     * @param day         - The day of the meeting (1-31).
-     * @param start       - The time the meeting starts (0-23).
-     * @param end         - The time the meeting ends (0-23).
-     * @param attendees   - The people attending the meeting.
-     * @param room        - The room that the meeting is taking place in.
-     * @param description - A description of the meeting.
-     * 
-     *                    public Meeting(int month, int day, int start, int end,
-     *                    ArrayList<Person> attendees, Room room, String
-     *                    description){
-     *                    this.month=month;
-     *                    this.day=day;
-     *                    this.start=start;
-     *                    this.end=end;
-     *                    this.attendees = attendees;
-     *                    this.room = room;
-     *                    this.description = description;
-     *                    }
-     */
+    @Test
+    public void testGetName() {
+        assertEquals("getName should return the person's name", "Test Person", person.getName());
+    }
+
+    @Test
+    public void testAddMeeting() throws TimeConflictException {
+        person.addMeeting(meeting);
+        // Verify meeting was added by checking if person is busy during meeting time
+        assertTrue("Person should be busy during the meeting time", person.isBusy(5, 15, 9, 11));
+    }
+
+    @Test
+    public void testAddMeetingConflict() {
+        try {
+            // Add first meeting
+            person.addMeeting(meeting);
+
+            // Try to add a conflicting meeting
+            Meeting conflictingMeeting = new Meeting(5, 15, 10, 12, new ArrayList<Person>(), room,
+                    "Conflicting Meeting");
+            person.addMeeting(conflictingMeeting);
+
+            // If we reach here, the test should fail because no exception was thrown
+            fail("Expected TimeConflictException was not thrown when adding conflicting meeting");
+        } catch (TimeConflictException e) {
+            // Verify the exception message contains relevant information
+            assertTrue("Exception message should mention the person's name", e.getMessage().contains("Test Person"));
+            assertTrue("Exception message should indicate a conflict", e.getMessage().contains("Conflict"));
+        }
+    }
+
+    @Test
+    public void testPrintAgendaMonth() throws TimeConflictException {
+        person.addMeeting(meeting);
+        String agenda = person.printAgenda(5);
+
+        // Verify all meeting details are in the agenda
+        assertTrue("Agenda should contain the meeting date", agenda.contains("5/15"));
+        assertTrue("Agenda should contain the meeting time", agenda.contains("9 - 11"));
+        assertTrue("Agenda should contain the meeting description", agenda.contains("Test Meeting"));
+        assertTrue("Agenda should contain the room ID", agenda.contains("Test Room"));
+    }
+
+    @Test
+    public void testPrintAgendaDay() throws TimeConflictException {
+        person.addMeeting(meeting);
+        String agenda = person.printAgenda(5, 15);
+
+        // Verify all meeting details are in the agenda
+        assertTrue("Agenda should contain the meeting date", agenda.contains("5/15"));
+        assertTrue("Agenda should contain the meeting time", agenda.contains("9 - 11"));
+        assertTrue("Agenda should contain the meeting description", agenda.contains("Test Meeting"));
+        assertTrue("Agenda should contain the room ID", agenda.contains("Test Room"));
+    }
+
+    @Test
+    public void testIsBusy() throws TimeConflictException {
+        person.addMeeting(meeting);
+
+        // Test during meeting time
+        assertTrue("Person should be busy during the meeting time", person.isBusy(5, 15, 9, 11));
+
+        // Test before meeting time
+        assertFalse("Person should not be busy before the meeting time", person.isBusy(5, 15, 7, 8));
+
+        // Test after meeting time
+        assertFalse("Person should not be busy after the meeting time", person.isBusy(5, 15, 12, 14));
+
+        // Test on a different day
+        assertFalse("Person should not be busy on a different day", person.isBusy(5, 16, 9, 11));
+    }
+
+    @Test
+    public void testGetMeeting() throws TimeConflictException {
+        person.addMeeting(meeting);
+        Meeting retrievedMeeting = person.getMeeting(5, 15, 0);
+
+        // Verify all meeting details are correct
+        assertEquals("Retrieved meeting should have the correct month", 5, retrievedMeeting.getMonth());
+        assertEquals("Retrieved meeting should have the correct day", 15, retrievedMeeting.getDay());
+        assertEquals("Retrieved meeting should have the correct start time", 9, retrievedMeeting.getStartTime());
+        assertEquals("Retrieved meeting should have the correct end time", 11, retrievedMeeting.getEndTime());
+        assertEquals("Retrieved meeting should have the correct description", "Test Meeting",
+                retrievedMeeting.getDescription());
+        assertEquals("Retrieved meeting should have the correct room", room, retrievedMeeting.getRoom());
+    }
+
+    @Test
+    public void testRemoveMeeting() throws TimeConflictException {
+        person.addMeeting(meeting);
+        assertTrue("Person should be busy before removing the meeting", person.isBusy(5, 15, 9, 11));
+
+        person.removeMeeting(5, 15, 0);
+        assertFalse("Person should not be busy after removing the meeting", person.isBusy(5, 15, 9, 11));
+    }
+
+    @Test
+    public void testMultipleMeetings() throws TimeConflictException {
+        // Add first meeting
+        person.addMeeting(meeting);
+
+        // Add second meeting on a different day
+        Meeting secondMeeting = new Meeting(5, 16, 13, 15, new ArrayList<Person>(), room, "Second Meeting");
+        person.addMeeting(secondMeeting);
+
+        // Verify both meetings are in the calendar
+        assertTrue("Person should be busy during the first meeting time", person.isBusy(5, 15, 9, 11));
+        assertTrue("Person should be busy during the second meeting time", person.isBusy(5, 16, 13, 15));
+
+        // Verify agenda contains both meetings
+        String monthAgenda = person.printAgenda(5);
+        assertTrue("Agenda should contain the first meeting", monthAgenda.contains("Test Meeting"));
+        assertTrue("Agenda should contain the second meeting", monthAgenda.contains("Second Meeting"));
+    }
+
+    @Test
+    public void testEmptyAgenda() {
+        String monthAgenda = person.printAgenda(5);
+        assertTrue("Empty agenda should return an empty string", monthAgenda.isEmpty() || monthAgenda.equals(""));
+    }
+
+    // Additional tests from the user's version
+
     @Test
     public void testAddValidMeeting() throws TimeConflictException {
         Room room = new Room("4");
@@ -68,14 +163,10 @@ public class PersonTest {
         Meeting meeting = new Meeting(3, 10, 9, 23, new ArrayList<>(Arrays.asList(attendee)), room, "Team Meeting");
 
         person.addMeeting(meeting);
-        assertEquals(meeting.toString(), person.getMeeting(3, 10, 0).toString());
+        assertEquals("Meeting should be correctly added and retrievable", meeting.toString(),
+                person.getMeeting(3, 10, 0).toString());
     }
 
-    /**
-     * Test Case: P3
-     * Test for Conflicting meetings
-     * it should fail with a TimeConflictException if the meeting times overlap
-     */
     @Test
     public void testAddMeetingConflictDiagnostic() throws TimeConflictException {
         Room room = new Room("A1");
@@ -89,20 +180,12 @@ public class PersonTest {
             person.addMeeting(meeting1);
             person.addMeeting(meeting1);
             person.addMeeting(meeting2);
-            // System.out.println(person.printAgenda(3, 10));
-            fail("THIS TEST SHOULD HAVE FAILED EARLIER");
+            fail("Expected TimeConflictException to be thrown");
         } catch (TimeConflictException e) {
-            assertTrue(e.getMessage().contains("Alice"));
-            // throw e;
+            assertTrue("Exception message should contain the person's name", e.getMessage().contains("Alice"));
         }
     }
 
-    /**
-     * Test Case: P4
-     * Test Adding a Meeting with Different Time (Non-conflicting)
-     * Validate that two meetings on the same day at non-overlapping times both
-     * succeed.
-     */
     @Test
     public void testAddTwoNonConflictingMeetings() throws TimeConflictException {
         Room room = new Room("B2");
@@ -122,15 +205,8 @@ public class PersonTest {
                 .filter(line -> !line.startsWith("Agenda for"))
                 .count();
 
-        assertEquals(4, meetingLines);
+        assertEquals("Agenda should contain the correct number of meetings", 4, meetingLines);
     }
-
-    /**
-     * Test Case: P5
-     * Test Adding a Meeting with Null Room
-     * This ensures edge case robustness, depending on how your constructor handles
-     * nulls.
-     */
 
     @Test
     public void testAddMeetingWithNoRoom() throws TimeConflictException {
@@ -144,19 +220,13 @@ public class PersonTest {
         person.addMeeting(meeting);
         Meeting retrieved = person.getMeeting(4, 1, 0);
 
-        assertEquals(4, retrieved.getMonth());
-        assertEquals(1, retrieved.getDay());
-        assertEquals("Remote Meeting", retrieved.getDescription());
-        assertEquals(null, retrieved.getRoom());
-        assertNull(retrieved.getRoom());
+        assertEquals("Retrieved meeting should have the correct month", 4, retrieved.getMonth());
+        assertEquals("Retrieved meeting should have the correct day", 1, retrieved.getDay());
+        assertEquals("Retrieved meeting should have the correct description", "Remote Meeting",
+                retrieved.getDescription());
+        assertNull("Retrieved meeting should have a null room", retrieved.getRoom());
     }
 
-    /**
-     * Test Case: P6
-     * Test Adding a Meeting with Empty Attendees
-     * This ensures edge case robustness, depending on how your constructor handles
-     * nulls.
-     */
     @Test
     public void testAddMeetingWithEmptyAttendees() throws TimeConflictException {
         Room room = new Room("C3");
@@ -170,27 +240,13 @@ public class PersonTest {
 
         Meeting retrieved = person.getMeeting(5, 2, 0);
 
-        assertEquals(5, retrieved.getMonth());
-        assertEquals(2, retrieved.getDay());
-        assertEquals("Team Building", retrieved.getDescription());
-        assertEquals(room, retrieved.getRoom());
+        assertEquals("Retrieved meeting should have the correct month", 5, retrieved.getMonth());
+        assertEquals("Retrieved meeting should have the correct day", 2, retrieved.getDay());
+        assertEquals("Retrieved meeting should have the correct description", "Team Building",
+                retrieved.getDescription());
+        assertEquals("Retrieved meeting should have the correct room", room, retrieved.getRoom());
     }
 
-    /**
-     * Test Case: P7 - Back-to-Back Meetings
-     * Test Adding a Meeting That Ends When Another Starts (Edge of Conflict)
-     * These meetings SHOULD conflict (end time of one meeting equals start time of
-     * another).
-     * 
-     * Purpose: Verify system correctly detects back-to-back meetings as conflicts.
-     * Test Data:
-     * - Meeting 1: 10:00-11:00
-     * - Meeting 2: 11:00-12:00
-     *
-     * Acceptance Criteria:
-     * ✅ TimeConflictException thrown when adding conflicting meeting
-     * ✅ First meeting remains in agenda, second meeting is rejected
-     */
     @Test
     public void testAddBackToBackMeetings() {
         Room room = new Room("C3");
@@ -204,20 +260,16 @@ public class PersonTest {
             fail("Expected TimeConflictException to be thrown");
         } catch (TimeConflictException e) {
             // Expected exception
-            assertTrue(e.getMessage().contains("Overlap with another item"));
-            assertTrue(e.getMessage().contains("First Slot"));
-            assertTrue(person.printAgenda(5, 5).contains("First Slot"));
-            assertFalse(person.printAgenda(5, 5).contains("Second Slot"));
+            assertTrue("Exception message should mention overlap",
+                    e.getMessage().contains("Overlap with another item"));
+            assertTrue("Exception message should mention the first meeting", e.getMessage().contains("First Slot"));
+            assertTrue("First meeting should still be in the agenda", person.printAgenda(5, 5).contains("First Slot"));
+            assertFalse("Second meeting should not be in the agenda", person.printAgenda(5, 5).contains("Second Slot"));
         } finally {
-            assertEquals(meeting1.toString(), person.getMeeting(5, 5, 0).toString());
+            assertEquals("First meeting should be retrievable", meeting1.toString(),
+                    person.getMeeting(5, 5, 0).toString());
         }
     }
-
-    /**
-     * Test Case: P8
-     * Test Add Meeting on a Different Day
-     * Ensure that calendar logic correctly distinguishes different days.
-     */
 
     @Test
     public void testAddMeetingOnDifferentDay() throws TimeConflictException {
@@ -230,16 +282,12 @@ public class PersonTest {
         person.addMeeting(meeting1);
         person.addMeeting(meeting2);
 
-        assertTrue(person.printAgenda(6, 1).contains("Day 1 Meeting"));
-        assertTrue(person.printAgenda(6, 2).contains("Day 2 Meeting"));
+        assertTrue("Agenda for day 1 should contain the first meeting",
+                person.printAgenda(6, 1).contains("Day 1 Meeting"));
+        assertTrue("Agenda for day 2 should contain the second meeting",
+                person.printAgenda(6, 2).contains("Day 2 Meeting"));
     }
 
-    // TESTING THE PRINT
-    /**
-     * Test Case: P9
-     * Test for a Valid Agenda
-     * Ensure that the agenda prints correctly for a month.
-     */
     @Test
     public void testPrintAgendaValid() throws TimeConflictException {
         Room room = new Room("A1");
@@ -253,73 +301,50 @@ public class PersonTest {
         person.addMeeting(meeting2);
 
         String agenda = person.printAgenda(3, 10); // Agenda for March 10
-        assertTrue(agenda.contains("Morning Standup"));
-        assertTrue(agenda.contains("Project Discussion"));
+        assertTrue("Agenda should contain the first meeting", agenda.contains("Morning Standup"));
+        assertTrue("Agenda should contain the second meeting", agenda.contains("Project Discussion"));
     }
 
-    /**
-     * Test Case: P10
-     * Test for No Meetings on a Specific Day
-     * Print agenda for a day with no meetings scheduled.
-     * 
-     * Test Description: Ensure that the method handles days with no meetings
-     * gracefully, possibly by returning a message like "No meetings scheduled".
-     */
     @Test
     public void testPrintAgendaNoMeetings() {
         String agenda = person.printAgenda(4, 21); // Agenda for April 21 (assuming no meetings)
-        assertEquals("Agenda for 4/21:", agenda.trim());
+        assertEquals("Agenda for a day with no meetings should show the date", "Agenda for 4/21:", agenda.trim());
     }
- /**
-     * Test Case: P11
-     * Test for Agenda in a Month with Multiple Days
-        * Print agenda for a month with multiple days.
-     * Scenario: Print agenda for a month (e.g., March) with multiple meetings.
-     * Test Description: Ensure that meetings for the entire month are correctly printed, and not just for one day.
-    */
 
     @Test
-    public void testPrintAgendaMonth() throws TimeConflictException {
+    public void testPrintAgendaMonthWithMultipleDays() throws TimeConflictException {
         Room room = new Room("A1");
         Person attendee = new Person("Alice");
         Person attendee1 = new Person("Derrick");
 
         Meeting meeting1 = new Meeting(3, 10, 9, 11, new ArrayList<>(Arrays.asList(attendee)), room, "Morning Standup");
-        Meeting meeting2 = new Meeting(3, 15, 12, 14, new ArrayList<>(Arrays.asList(attendee1)), room, "Project Review");
+        Meeting meeting2 = new Meeting(3, 15, 12, 14, new ArrayList<>(Arrays.asList(attendee1)), room,
+                "Project Review");
         Meeting meeting3 = new Meeting(4, 15, 12, 14, new ArrayList<>(Arrays.asList(attendee)), room, "Project Review");
 
         person.addMeeting(meeting1);
         person.addMeeting(meeting2);
         person.addMeeting(meeting3);
 
-        String agenda = person.printAgenda(3);  // Agenda for March (whole month)
+        String agenda = person.printAgenda(3); // Agenda for March (whole month)
 
-        assertTrue(agenda.contains("3/"));
-        assertTrue(agenda.contains("Project Review"));
+        assertTrue("Agenda should contain the month/day format", agenda.contains("3/"));
+        assertTrue("Agenda should contain the meeting description", agenda.contains("Project Review"));
     }
 
-    /**
-     * Test Case: P12
-     * Test for Agenda Format
-    * Scenario: Ensure that the agenda is printed in the correct format.
+    @Test
+    public void testPrintAgendaFormat() throws TimeConflictException {
+        Room room = new Room("A1");
+        Person attendee = new Person("Alice");
 
-    Test Description: Verify that the agenda is formatted as expected, such as listing meetings by time and description.
-*/
-@Test
-public void testPrintAgendaFormat() throws TimeConflictException {
-    Room room = new Room("A1");
-    Person attendee = new Person("Alice");
+        Meeting meeting1 = new Meeting(3, 10, 9, 11, new ArrayList<>(Arrays.asList(attendee)), room, "Morning Standup");
+        person.addMeeting(meeting1);
 
-    Meeting meeting1 = new Meeting(3, 10, 9, 11, new ArrayList<>(Arrays.asList(attendee)), room, "Morning Standup");
-    person.addMeeting(meeting1);
+        String agenda = person.printAgenda(3, 10);
 
-    String agenda = person.printAgenda(3, 10);
-            System.out.println(agenda);
-    
-    assertTrue(agenda.contains("Morning Standup"));
-    // assertTrue(agenda.contains("9:00 AM - 11:00 AM"));
-
-    assertTrue(agenda.contains("3/10, 9 - 11,A1: Morning Standup"));
-}
-
+        assertTrue("Agenda should contain the meeting description", agenda.contains("Morning Standup"));
+        assertTrue("Agenda should contain the meeting time", agenda.contains("9 - 11"));
+        assertTrue("Agenda should contain the meeting details in the correct format",
+                agenda.contains("3/10, 9 - 11,A1: Morning Standup"));
+    }
 }
