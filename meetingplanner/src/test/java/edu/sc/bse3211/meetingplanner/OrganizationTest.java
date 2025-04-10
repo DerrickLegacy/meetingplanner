@@ -62,16 +62,27 @@ public class OrganizationTest {
     }
 
 
-    @Test(expected = IllegalArgumentException.class)
+    @Test
     public void testGetEmployee_Null() throws Exception {
         Organization org = new Organization();
-        org.getEmployee(null);
+        try {
+            org.getEmployee(null);
+            fail("Expected an exception to be thrown");
+        } catch (Exception e) {
+            assertEquals("Requested employee does not exist", e.getMessage());
+        }
     }
 
-    @Test(expected = IllegalArgumentException.class)
+
+    @Test
     public void testGetRoom_Null() throws Exception {
         Organization org = new Organization();
-        org.getRoom(null);
+        try {
+            org.getRoom(null);
+            fail("Expected an exception to be thrown");  // If no exception, test fails
+        } catch (Exception e) {
+            assertEquals("Requested room does not exist", e.getMessage());
+        }
     }
 
     @Test(expected = Exception.class)
