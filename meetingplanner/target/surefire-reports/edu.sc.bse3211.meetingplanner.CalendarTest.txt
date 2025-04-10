@@ -1,0 +1,11 @@
+-------------------------------------------------------------------------------
+Test set: edu.sc.bse3211.meetingplanner.CalendarTest
+-------------------------------------------------------------------------------
+Tests run: 16, Failures: 2, Errors: 0, Skipped: 0, Time elapsed: 0.048 s <<< FAILURE! - in edu.sc.bse3211.meetingplanner.CalendarTest
+testInvalidDateAgain(edu.sc.bse3211.meetingplanner.CalendarTest)  Time elapsed: 0.009 s  <<< FAILURE!
+java.lang.AssertionError: Expected exception: edu.sc.bse3211.meetingplanner.TimeConflictException
+
+testAddMeeting_conflict(edu.sc.bse3211.meetingplanner.CalendarTest)  Time elapsed: 0.001 s  <<< FAILURE!
+java.lang.AssertionError: Expected a TimeConflictException
+	at edu.sc.bse3211.meetingplanner.CalendarTest.testAddMeeting_conflict(CalendarTest.java:66)
+
