@@ -30,6 +30,7 @@
     <property name="java.vm.compressedOopsMode" value="Zero based"/>
     <property name="line.separator" value="&#10;"/>
     <property name="java.vm.specification.vendor" value="Oracle Corporation"/>
+    <property name="java.vm.specification.vendor" value="Oracle Corporation"/>
     <property name="java.specification.name" value="Java Platform API Specification"/>
     <property name="surefire.real.class.path" value="C:\Users\HPPROB~1\AppData\Local\Temp\surefire16166291711113597172\surefirebooter9804910819029379804.jar"/>
     <property name="user.script" value=""/>
