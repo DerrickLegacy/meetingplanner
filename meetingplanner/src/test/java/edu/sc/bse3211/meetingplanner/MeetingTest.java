@@ -8,8 +8,10 @@ import org.junit.Test;
 
 public class MeetingTest {
 
-  // Add test methods here.
-  // You are not required to write tests for all classes.
+  private Meeting meeting;
+  private Person person1;
+  private Person person2;
+  private Room room;
 
   @Before
   public void setUp() {
@@ -20,15 +22,25 @@ public class MeetingTest {
       new Meeting(5, 15, 9, 11, new ArrayList<>(), room, "Team Meeting");
   }
 
-  // Test 1: Default constructor
+  // ===== Constructor Tests =====
+  
+  // Test Case 1: Default Constructor
+  // Verifies that a meeting created with default constructor has expected initial values
   @Test
-  public void testDefaultConstructor() { //creating a Meeting with the default constructor
+  public void testDefaultConstructor() {
     Meeting defaultMeeting = new Meeting();
     assertNotNull("Default meeting should not be null", defaultMeeting);
+    assertEquals("Default month should be 0", 0, defaultMeeting.getMonth());
+    assertEquals("Default day should be 0", 0, defaultMeeting.getDay());
+    assertEquals("Default start time should be 0", 0, defaultMeeting.getStartTime());
+    assertEquals("Default end time should be 0", 0, defaultMeeting.getEndTime());
+    assertNull("Default room should be null", defaultMeeting.getRoom());
+    assertNull("Default description should be null", defaultMeeting.getDescription());
+    assertNotNull("Default attendees list should not be null", defaultMeeting.getAttendees());
   }
 
-  // Test 2: Basic constructor with month and day
-  //checks that the constructor with only month and day sets the correct time range (0–23).
+  // Test Case 2: Month-Day Constructor
+  // Verifies that a meeting created with month and day has correct values and full day range
   @Test
   public void testMonthDayConstructor() {
     Meeting dayMeeting = new Meeting(6, 20);
@@ -38,273 +50,177 @@ public class MeetingTest {
     assertEquals("End time should be 23", 23, dayMeeting.getEndTime());
   }
 
-  // Test 3: Full constructor with all parameters
-  private Meeting meeting;
-  private Person person1;
-  private Person person2;
-  private Room room;
+  // Test Case 3: Month-Day-Description Constructor
+  // Verifies that a meeting created with month, day, and description has correct values
+  @Test
+  public void testMonthDayDescriptionConstructor() {
+    Meeting meeting = new Meeting(3, 21, "Public Holiday");
+    assertEquals("Month should be 3", 3, meeting.getMonth());
+    assertEquals("Day should be 21", 21, meeting.getDay());
+    assertEquals("Start time should be 0", 0, meeting.getStartTime());
+    assertEquals("End time should be 23", 23, meeting.getEndTime());
+    assertEquals("Description should match", "Public Holiday", meeting.getDescription());
+  }
 
+  // Test Case 4: Full Constructor
+  // Verifies that a meeting created with all parameters has correct values
   @Test
   public void testFullConstructor() {
     ArrayList<Person> attendees = new ArrayList<>();
     attendees.add(person1);
-    Meeting fullMeeting = new Meeting(
-      9,
-      10,
-      14,
-      16,
-      attendees,
-      room,
-      "Project Review"
-    );
+    Meeting fullMeeting = new Meeting(9, 10, 14, 16, attendees, room, "Project Review");
 
     assertEquals("Month should be 9", 9, fullMeeting.getMonth());
     assertEquals("Day should be 10", 10, fullMeeting.getDay());
     assertEquals("Start time should be 14", 14, fullMeeting.getStartTime());
     assertEquals("End time should be 16", 16, fullMeeting.getEndTime());
     assertEquals("Room should match", room, fullMeeting.getRoom());
-    assertEquals(
-      "Description should be 'Project Review'",
-      "Project Review",
-      fullMeeting.getDescription()
-    );
-    assertEquals(
-      "Number of attendees should be 1",
-      1,
-      fullMeeting.getAttendees().size()
-    );
+    assertEquals("Description should be 'Project Review'", "Project Review", fullMeeting.getDescription());
+    assertEquals("Number of attendees should be 1", 1, fullMeeting.getAttendees().size());
   }
 
-  // Test 4: Adding and removing attendees
+  // ===== Attendee Management Tests =====
+
+  // Test Case 5: Adding Attendees
+  // Verifies that attendees can be added correctly
   @Test
-  public void testAttendeeManagement() {
+  public void testAddAttendee() {
     meeting.addAttendee(person1);
-    assertEquals(
-      "Number of attendees should be 1",
-      1,
-      meeting.getAttendees().size()
-    );
-    assertTrue(
-      "Attendees should contain person1",
-      meeting.getAttendees().contains(person1)
-    );
+    assertEquals("Number of attendees should be 1", 1, meeting.getAttendees().size());
+    assertTrue("Attendees should contain person1", meeting.getAttendees().contains(person1));
+  }
 
+  // Test Case 6: Removing Attendees
+  // Verifies that attendees can be removed correctly
+  @Test
+  public void testRemoveAttendee() {
+    meeting.addAttendee(person1);
     meeting.removeAttendee(person1);
-    assertEquals(
-      "Number of attendees should be 0",
-      0,
-      meeting.getAttendees().size()
-    );
-    assertFalse(
-      "Attendees should not contain person1",
-      meeting.getAttendees().contains(person1)
-    );
+    assertEquals("Number of attendees should be 0", 0, meeting.getAttendees().size());
+    assertFalse("Attendees should not contain person1", meeting.getAttendees().contains(person1));
   }
 
-  //Test 5
-  //Creates a meeting using the (int month, int day) constructor.
-  //Checks if the month, day, start, and end values are set correctly.
+  // Test Case 7: Multiple Attendees
+  // Verifies that multiple attendees can be managed correctly
   @Test
-  public void testFullDayConstructor() { //testing block off a whole day
-    // Arrange
-    int month = 2;
-    int day = 15;
-
-    // Act
-    Meeting meeting = new Meeting(month, day);
-
-    // Assert
-    assertEquals(month, meeting.getMonth());
-    assertEquals(day, meeting.getDay());
-    assertEquals(0, meeting.getStartTime()); // Should default to start of day
-    assertEquals(23, meeting.getEndTime()); // Should default to end of day
+  public void testMultipleAttendees() {
+    meeting.addAttendee(person1);
+    meeting.addAttendee(person2);
+    assertEquals("Number of attendees should be 2", 2, meeting.getAttendees().size());
+    assertTrue("Attendees should contain person1", meeting.getAttendees().contains(person1));
+    assertTrue("Attendees should contain person2", meeting.getAttendees().contains(person2));
   }
 
-  //Test 6
-  //
+  // ===== Time Management Tests =====
+
+  // Test Case 8: Valid Time Range
+  // Verifies that valid time ranges are accepted
   @Test
-  public void testFullDayWithDescriptionConstructor() {
-    // Arrange
-    int month = 3;
-    int day = 21;
-    String desc = "Public Holiday";
-
-    // Act
-    Meeting meeting = new Meeting(month, day, desc);
-
-    // Assert
-    assertEquals(month, meeting.getMonth());
-    assertEquals(day, meeting.getDay());
-    assertEquals(0, meeting.getStartTime());
-    assertEquals(23, meeting.getEndTime());
-    assertEquals(desc, meeting.getDescription());
+  public void testValidTimeRange() {
+    Meeting timeMeeting = new Meeting(5, 15, 9, 11);
+    assertEquals("Start time should be 9", 9, timeMeeting.getStartTime());
+    assertEquals("End time should be 11", 11, timeMeeting.getEndTime());
   }
 
-  //Test 7 invalid date feb 35
+  // Test Case 9: Invalid Time Range
+  // Verifies that invalid time ranges are handled correctly
   @Test
-  public void testInvalidDate_February35th() {
-    Meeting meeting = new Meeting(2, 35, 10, 12);
-    assertEquals("Month should still be 2", 2, meeting.getMonth());
-    assertEquals("Day should still be 35", 35, meeting.getDay());
-    // But ideally you'd throw an exception here if implementing date validation
+  public void testInvalidTimeRange() {
+    Meeting invalidTimeMeeting = new Meeting(5, 15, 14, 10);
+    assertTrue("Start time should be greater than end time", 
+              invalidTimeMeeting.getStartTime() > invalidTimeMeeting.getEndTime());
   }
 
-  //Test 8 checking attendees list is initialized correctly before calling addAttendee()
+  // ===== Date Validation Tests =====
+
+  // Test Case 10: Invalid Date
+  // Verifies that invalid dates are handled correctly
   @Test
-  public void testAttendeesNullSafety() {
-      try {
-          Meeting meeting = new Meeting(5, 15, 9, 11);
-          meeting.addAttendee(new Person("Ali"));
-          // ✅ Success — no exception thrown
-      } catch (Exception e) {
-          fail("addAttendee should not throw an exception when attendees list is not initialized.");
-      }
+  public void testInvalidDate() {
+    Meeting invalidDateMeeting = new Meeting(2, 35, 10, 12);
+    assertEquals("Month should be 2", 2, invalidDateMeeting.getMonth());
+    assertEquals("Day should be 35", 35, invalidDateMeeting.getDay());
   }
-  
 
-  //Test 9 Start Time >= End Time
+  // ===== String Representation Tests =====
+
+  // Test Case 11: toString with All Fields
+  // Verifies that toString method formats meeting information correctly
   @Test
-  public void testStartTimeAfterEndTime() {
-    Meeting meeting = new Meeting(5, 15, 14, 10);
-    assertTrue(meeting.getStartTime() > meeting.getEndTime());
+  public void testToString() {
+    meeting.addAttendee(person1);
+    meeting.addAttendee(person2);
+    String expected = "5/15, 9 - 11,Room 101: Team Meeting\nAttending: John,Jane";
+    assertEquals("toString should match expected format", expected, meeting.toString());
   }
-  // private Meeting meeting;
-  // private Person person1;
-  // private Person person2;
-  // private Room room;
 
-  // @Before
-  // public void setUp() {
-  //     // Initialize test objects before each test
-  //     person1 = new Person("John Doe");
-  //     person2 = new Person("Jane Smith");
-  //     room = new Room("Room 101");
-  //     meeting = new Meeting(5, 15, 9, 11, new ArrayList<Person>(), room, "Team Meeting");
-  // }
+  // Test Case 12: toString with Null Values
+  // Verifies that toString handles null values correctly
+  @Test
+  public void testToStringWithNullValues() {
+    Meeting nullMeeting = new Meeting(5, 15, 9, 11, new ArrayList<>(), null, null);
+    String expected = "5/15, 9 - 11,null: null\nAttending: ";
+    assertEquals("toString should handle null values", expected, nullMeeting.toString());
+  }
 
-  // // Test 1: Default constructor
-  // @Test
-  // public void testDefaultConstructor() {
-  //     Meeting defaultMeeting = new Meeting();
-  //     assertNotNull("Default meeting should not be null", defaultMeeting);
-  // }
 
-  // // Test 2: Basic constructor with month and day
-  // @Test
-  // public void testMonthDayConstructor() {
-  //     Meeting dayMeeting = new Meeting(6, 20);
-  //     assertEquals("Month should be 6", 6, dayMeeting.getMonth());
-  //     assertEquals("Day should be 20", 20, dayMeeting.getDay());
-  //     assertEquals("Start time should be 0", 0, dayMeeting.getStartTime());
-  //     assertEquals("End time should be 23", 23, dayMeeting.getEndTime());
-  // }
+  // Test Case 13: Boundary Conditions for Time
+  // Verifies that meetings can be scheduled at the earliest and latest possible times
+  @Test
+  public void testTimeBoundaries() {
+    Meeting earlyMeeting = new Meeting(5, 15, 0, 1);
+    assertEquals("Earliest start time should be 0", 0, earlyMeeting.getStartTime());
+    
+    Meeting lateMeeting = new Meeting(5, 15, 22, 23);
+    assertEquals("Latest end time should be 23", 23, lateMeeting.getEndTime());
+    
+    Meeting fullDayMeeting = new Meeting(5, 15, 0, 23);
+    assertEquals("Full day start time should be 0", 0, fullDayMeeting.getStartTime());
+    assertEquals("Full day end time should be 23", 23, fullDayMeeting.getEndTime());
+  }
 
-  // // Test 3: Full constructor with all parameters
-  // @Test
-  // public void testFullConstructor() {
-  //     ArrayList<Person> attendees = new ArrayList<>();
-  //     attendees.add(person1);
-  //     Meeting fullMeeting = new Meeting(9, 10, 14, 16, attendees, room, "Project Review");
+  // Test Case 14: Meeting Equality
+  // Verifies that two meetings with the same properties are considered equal
+  @Test
+  public void testMeetingEquality() {
+    ArrayList<Person> attendees1 = new ArrayList<>();
+    ArrayList<Person> attendees2 = new ArrayList<>();
+    attendees1.add(person1);
+    attendees2.add(person1);
+    
+    Meeting meeting1 = new Meeting(5, 15, 9, 11, attendees1, room, "Team Meeting");
+    Meeting meeting2 = new Meeting(5, 15, 9, 11, attendees2, room, "Team Meeting");
+    
+    assertEquals("Meetings with same properties should have same string representation", 
+                meeting1.toString(), meeting2.toString());
+  }
 
-  //     assertEquals("Month should be 9", 9, fullMeeting.getMonth());
-  //     assertEquals("Day should be 10", 10, fullMeeting.getDay());
-  //     assertEquals("Start time should be 14", 14, fullMeeting.getStartTime());
-  //     assertEquals("End time should be 16", 16, fullMeeting.getEndTime());
-  //     assertEquals("Room should match", room, fullMeeting.getRoom());
-  //     assertEquals("Description should be 'Project Review'", "Project Review", fullMeeting.getDescription());
-  //     assertEquals("Number of attendees should be 1", 1, fullMeeting.getAttendees().size());
-  // }
+  // Test Case 15: Empty Meeting
+  // Verifies that a meeting can be created with minimal parameters
+  @Test
+  public void testEmptyMeeting() {
+    Meeting emptyMeeting = new Meeting(5, 15, 9, 11);
+    assertNotNull("Empty meeting should not be null", emptyMeeting);
+    assertEquals("Empty meeting should have no attendees", 0, emptyMeeting.getAttendees().size());
+    assertNull("Empty meeting should have no room", emptyMeeting.getRoom());
+    assertNull("Empty meeting should have no description", emptyMeeting.getDescription());
+  }
 
-  // // Test 4: Adding and removing attendees
-  // @Test
-  // public void testAttendeeManagement() {
-  //     meeting.addAttendee(person1);
-  //     assertEquals("Number of attendees should be 1", 1, meeting.getAttendees().size());
-  //     assertTrue("Attendees should contain person1", meeting.getAttendees().contains(person1));
-
-  //     meeting.removeAttendee(person1);
-  //     assertEquals("Number of attendees should be 0", 0, meeting.getAttendees().size());
-  //     assertFalse("Attendees should not contain person1", meeting.getAttendees().contains(person1));
-  // }
-
-  // // Test 5: Invalid month values
-  // @Test(expected = IllegalArgumentException.class)
-  // public void testInvalidMonth() {
-  //     new Meeting(0, 15, 9, 11); // Month should be between 1-12
-  // }
-
-  // // Test 6: Invalid day values
-  // @Test(expected = IllegalArgumentException.class)
-  // public void testInvalidDay() {
-  //     new Meeting(5, 32, 9, 11); // Day should be between 1-31
-  // }
-
-  // // Test 7: Invalid time values
-  // @Test(expected = IllegalArgumentException.class)
-  // public void testInvalidTime() {
-  //     new Meeting(5, 15, -1, 11); // Start time should be between 0-23
-  // }
-
-  // // Test 8: End time before start time
-  // @Test(expected = IllegalArgumentException.class)
-  // public void testEndTimeBeforeStartTime() {
-  //     new Meeting(5, 15, 14, 12); // End time should be after start time
-  // }
-
-  // // Test 9: Multiple attendees
-  // @Test
-  // public void testMultipleAttendees() {
-  //     meeting.addAttendee(person1);
-  //     meeting.addAttendee(person2);
-  //     assertEquals("Number of attendees should be 2", 2, meeting.getAttendees().size());
-  //     assertTrue("Attendees should contain person1", meeting.getAttendees().contains(person1));
-  //     assertTrue("Attendees should contain person2", meeting.getAttendees().contains(person2));
-  // }
-
-  // // Test 10: Empty meeting
-  // @Test
-  // public void testEmptyMeeting() {
-  //     Meeting emptyMeeting = new Meeting(5, 15, 9, 11);
-  //     assertNotNull("Empty meeting should not be null", emptyMeeting);
-  //     assertEquals("Empty meeting should have no attendees", 0, emptyMeeting.getAttendees().size());
-  //     assertNull("Empty meeting should have no room", emptyMeeting.getRoom());
-  //     assertNull("Empty meeting should have no description", emptyMeeting.getDescription());
-  // }
-
-  // // Test 11: Boundary conditions for time
-  // @Test
-  // public void testTimeBoundaries() {
-  //     Meeting boundaryMeeting = new Meeting(5, 15, 0, 23);
-  //     assertEquals("Start time should be 0", 0, boundaryMeeting.getStartTime());
-  //     assertEquals("End time should be 23", 23, boundaryMeeting.getEndTime());
-  // }
-
-  // // Test 12: toString with all fields
-  // @Test
-  // public void testToString() {
-  //     meeting.addAttendee(person1);
-  //     meeting.addAttendee(person2);
-  //     String expected = "5/15, 9 - 11,Room 101: Team Meeting\nAttending: John Doe,Jane Smith";
-  //     assertEquals("toString should match expected format", expected, meeting.toString());
-  // }
-
-  // // Test 13: toString with null values
-  // @Test
-  // public void testToStringWithNullValues() {
-  //     Meeting nullMeeting = new Meeting(5, 15, 9, 11, new ArrayList<Person>(), null, null);
-  //     String expected = "5/15, 9 - 11,null: null\nAttending: ";
-  //     assertEquals("toString should handle null values", expected, nullMeeting.toString());
-  // }
-
-  // // Test 14: Meeting equality
-  // @Test
-  // public void testMeetingEquality() {
-  //     Meeting meeting1 = new Meeting(5, 15, 9, 11, new ArrayList<Person>(), room, "Team Meeting");
-  //     Meeting meeting2 = new Meeting(5, 15, 9, 11, new ArrayList<Person>(), room, "Team Meeting");
-
-  //     meeting1.addAttendee(person1);
-  //     meeting2.addAttendee(person1);
-
-  //     assertEquals("Meetings with same properties should be equal", meeting1.toString(), meeting2.toString());
-  // }
+  // Test Case 16: Meeting Description Update
+  // Verifies that meeting description can be updated correctly
+  @Test
+  public void testDescriptionUpdate() {
+    String initialDesc = "Initial Meeting";
+    String updatedDesc = "Updated Meeting";
+    
+    Meeting meeting = new Meeting(5, 15, 9, 11, new ArrayList<>(), room, initialDesc);
+    assertEquals("Initial description should match", initialDesc, meeting.getDescription());
+    
+    meeting.setDescription(updatedDesc);
+    assertEquals("Updated description should match", updatedDesc, meeting.getDescription());
+    
+    // Test setting description to null
+    meeting.setDescription(null);
+    assertNull("Description should be null after setting to null", meeting.getDescription());
+  }
 }

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report.xsd" name="edu.sc.bse3211.meetingplanner.MeetingTest" time="0.002" tests="9" errors="0" skipped="0" failures="1">
+<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report.xsd" name="edu.sc.bse3211.meetingplanner.MeetingTest" time="0.006" tests="16" errors="2" skipped="0" failures="1">
   <properties>
     <property name="java.specification.version" value="19"/>
     <property name="sun.cpu.isalist" value="amd64"/>
@@ -16,7 +16,7 @@
     <property name="sun.java.launcher" value="SUN_STANDARD"/>
     <property name="user.country" value="US"/>
     <property name="sun.boot.library.path" value="C:\Program Files\Java\jdk-19\bin"/>
-    <property name="sun.java.command" value="C:\Users\HPPROB~1\AppData\Local\Temp\surefire13134696196870437464\surefirebooter12023617362274790257.jar C:\Users\HP PROBOOK\AppData\Local\Temp\surefire13134696196870437464 2025-04-10T10-13-05_934-jvmRun1 surefire11263916152153922704tmp surefire_08785774493359685516tmp"/>
+    <property name="sun.java.command" value="C:\Users\HPPROB~1\AppData\Local\Temp\surefire17806381457250014586\surefirebooter1544068814725119196.jar C:\Users\HP PROBOOK\AppData\Local\Temp\surefire17806381457250014586 2025-04-10T14-43-50_623-jvmRun1 surefire16158091770540565496tmp surefire_018228903317944298910tmp"/>
     <property name="jdk.debug" value="release"/>
     <property name="surefire.test.class.path" value="c:\Users\HP PROBOOK\Desktop\meetingplanner\meetingplanner\target\test-classes;c:\Users\HP PROBOOK\Desktop\meetingplanner\meetingplanner\target\classes;C:\Users\HP PROBOOK\.m2\repository\junit\junit\4.11\junit-4.11.jar;C:\Users\HP PROBOOK\.m2\repository\org\hamcrest\hamcrest-core\1.3\hamcrest-core-1.3.jar;"/>
     <property name="sun.cpu.endian" value="little"/>
@@ -31,7 +31,7 @@
     <property name="line.separator" value="&#10;"/>
     <property name="java.vm.specification.vendor" value="Oracle Corporation"/>
     <property name="java.specification.name" value="Java Platform API Specification"/>
-    <property name="surefire.real.class.path" value="C:\Users\HPPROB~1\AppData\Local\Temp\surefire13134696196870437464\surefirebooter12023617362274790257.jar"/>
+    <property name="surefire.real.class.path" value="C:\Users\HPPROB~1\AppData\Local\Temp\surefire17806381457250014586\surefirebooter1544068814725119196.jar"/>
     <property name="user.script" value=""/>
     <property name="sun.management.compiler" value="HotSpot 64-Bit Tiered Compilers"/>
     <property name="java.runtime.version" value="19.0.1+10-21"/>
@@ -59,17 +59,32 @@
     <property name="sun.io.unicode.encoding" value="UnicodeLittle"/>
     <property name="java.class.version" value="63.0"/>
   </properties>
-  <testcase name="testStartTimeAfterEndTime" classname="edu.sc.bse3211.meetingplanner.MeetingTest" time="0"/>
-  <testcase name="testFullDayWithDescriptionConstructor" classname="edu.sc.bse3211.meetingplanner.MeetingTest" time="0"/>
-  <testcase name="testInvalidDate_February35th" classname="edu.sc.bse3211.meetingplanner.MeetingTest" time="0"/>
+  <testcase name="testInvalidTimeRange" classname="edu.sc.bse3211.meetingplanner.MeetingTest" time="0"/>
+  <testcase name="testInvalidDate" classname="edu.sc.bse3211.meetingplanner.MeetingTest" time="0"/>
+  <testcase name="testMonthDayDescriptionConstructor" classname="edu.sc.bse3211.meetingplanner.MeetingTest" time="0"/>
+  <testcase name="testAddAttendee" classname="edu.sc.bse3211.meetingplanner.MeetingTest" time="0"/>
+  <testcase name="testToString" classname="edu.sc.bse3211.meetingplanner.MeetingTest" time="0"/>
+  <testcase name="testMeetingEquality" classname="edu.sc.bse3211.meetingplanner.MeetingTest" time="0"/>
   <testcase name="testMonthDayConstructor" classname="edu.sc.bse3211.meetingplanner.MeetingTest" time="0"/>
   <testcase name="testFullConstructor" classname="edu.sc.bse3211.meetingplanner.MeetingTest" time="0"/>
-  <testcase name="testFullDayConstructor" classname="edu.sc.bse3211.meetingplanner.MeetingTest" time="0"/>
-  <testcase name="testAttendeesNullSafety" classname="edu.sc.bse3211.meetingplanner.MeetingTest" time="0">
-    <failure message="addAttendee should not throw an exception when attendees list is not initialized." type="java.lang.AssertionError">java.lang.AssertionError: addAttendee should not throw an exception when attendees list is not initialized.
-	at edu.sc.bse3211.meetingplanner.MeetingTest.testAttendeesNullSafety(MeetingTest.java:160)
+  <testcase name="testToStringWithNullValues" classname="edu.sc.bse3211.meetingplanner.MeetingTest" time="0">
+    <error message="Cannot invoke &quot;edu.sc.bse3211.meetingplanner.Room.getID()&quot; because &quot;this.room&quot; is null" type="java.lang.NullPointerException">java.lang.NullPointerException: Cannot invoke "edu.sc.bse3211.meetingplanner.Room.getID()" because "this.room" is null
+	at edu.sc.bse3211.meetingplanner.MeetingTest.testToStringWithNullValues(MeetingTest.java:163)
+</error>
+  </testcase>
+  <testcase name="testMultipleAttendees" classname="edu.sc.bse3211.meetingplanner.MeetingTest" time="0"/>
+  <testcase name="testTimeBoundaries" classname="edu.sc.bse3211.meetingplanner.MeetingTest" time="0"/>
+  <testcase name="testDescriptionUpdate" classname="edu.sc.bse3211.meetingplanner.MeetingTest" time="0"/>
+  <testcase name="testValidTimeRange" classname="edu.sc.bse3211.meetingplanner.MeetingTest" time="0.002"/>
+  <testcase name="testEmptyMeeting" classname="edu.sc.bse3211.meetingplanner.MeetingTest" time="0.001">
+    <error message="Cannot invoke &quot;java.util.ArrayList.size()&quot; because the return value of &quot;edu.sc.bse3211.meetingplanner.Meeting.getAttendees()&quot; is null" type="java.lang.NullPointerException">java.lang.NullPointerException: Cannot invoke "java.util.ArrayList.size()" because the return value of "edu.sc.bse3211.meetingplanner.Meeting.getAttendees()" is null
+	at edu.sc.bse3211.meetingplanner.MeetingTest.testEmptyMeeting(MeetingTest.java:204)
+</error>
+  </testcase>
+  <testcase name="testRemoveAttendee" classname="edu.sc.bse3211.meetingplanner.MeetingTest" time="0"/>
+  <testcase name="testDefaultConstructor" classname="edu.sc.bse3211.meetingplanner.MeetingTest" time="0.001">
+    <failure message="Default attendees list should not be null" type="java.lang.AssertionError">java.lang.AssertionError: Default attendees list should not be null
+	at edu.sc.bse3211.meetingplanner.MeetingTest.testDefaultConstructor(MeetingTest.java:39)
 </failure>
   </testcase>
-  <testcase name="testAttendeeManagement" classname="edu.sc.bse3211.meetingplanner.MeetingTest" time="0"/>
-  <testcase name="testDefaultConstructor" classname="edu.sc.bse3211.meetingplanner.MeetingTest" time="0"/>
 </testsuite>
