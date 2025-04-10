@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report.xsd" name="edu.sc.bse3211.meetingplanner.PersonTest" time="0" tests="2" errors="0" skipped="0" failures="0">
+<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report.xsd" name="edu.sc.bse3211.meetingplanner.PersonTest" time="0.117" tests="23" errors="0" skipped="0" failures="2">
   <properties>
     <property name="java.specification.version" value="24"/>
     <property name="sun.jnu.encoding" value="UTF-8"/>
@@ -12,7 +12,7 @@
     <property name="sun.java.launcher" value="SUN_STANDARD"/>
     <property name="user.country" value="US"/>
     <property name="sun.boot.library.path" value="/opt/jdk-24/lib"/>
-    <property name="sun.java.command" value="/home/derrick-legacy/Desktop/Software Testing Assignment/meetingplanner/meetingplanner/target/surefire/surefirebooter2964969172384757534.jar /home/derrick-legacy/Desktop/Software Testing Assignment/meetingplanner/meetingplanner/target/surefire 2025-04-08T11-39-57_691-jvmRun1 surefire14895247382866564002tmp surefire_0808489454327102628tmp"/>
+    <property name="sun.java.command" value="/home/derrick-legacy/Desktop/Software Testing Assignment/meetingplanner/meetingplanner/target/surefire/surefirebooter2850268818715184587.jar /home/derrick-legacy/Desktop/Software Testing Assignment/meetingplanner/meetingplanner/target/surefire 2025-04-10T15-11-08_927-jvmRun1 surefire7078363863997844858tmp surefire_04937798963061500314tmp"/>
     <property name="jdk.debug" value="release"/>
     <property name="surefire.test.class.path" value="/home/derrick-legacy/Desktop/Software Testing Assignment/meetingplanner/meetingplanner/target/test-classes:/home/derrick-legacy/Desktop/Software Testing Assignment/meetingplanner/meetingplanner/target/classes:/home/derrick-legacy/.m2/repository/junit/junit/4.11/junit-4.11.jar:/home/derrick-legacy/.m2/repository/org/hamcrest/hamcrest-core/1.3/hamcrest-core-1.3.jar:"/>
     <property name="sun.cpu.endian" value="little"/>
@@ -27,7 +27,7 @@
     <property name="line.separator" value="&#10;"/>
     <property name="java.specification.name" value="Java Platform API Specification"/>
     <property name="java.vm.specification.vendor" value="Oracle Corporation"/>
-    <property name="surefire.real.class.path" value="/home/derrick-legacy/Desktop/Software Testing Assignment/meetingplanner/meetingplanner/target/surefire/surefirebooter2964969172384757534.jar"/>
+    <property name="surefire.real.class.path" value="/home/derrick-legacy/Desktop/Software Testing Assignment/meetingplanner/meetingplanner/target/surefire/surefirebooter2850268818715184587.jar"/>
     <property name="sun.management.compiler" value="HotSpot 64-Bit Tiered Compilers"/>
     <property name="java.runtime.version" value="24+36-3646"/>
     <property name="user.name" value="derrick-legacy"/>
@@ -53,6 +53,35 @@
     <property name="sun.io.unicode.encoding" value="UnicodeLittle"/>
     <property name="java.class.version" value="68.0"/>
   </properties>
-  <testcase name="testParameterizedConstructor" classname="edu.sc.bse3211.meetingplanner.PersonTest" time="0"/>
-  <testcase name="testDefaultConstructor" classname="edu.sc.bse3211.meetingplanner.PersonTest" time="0"/>
+  <testcase name="testAddMeetingWithNoRoom" classname="edu.sc.bse3211.meetingplanner.PersonTest" time="0.011"/>
+  <testcase name="testPrintAgendaMonth" classname="edu.sc.bse3211.meetingplanner.PersonTest" time="0"/>
+  <testcase name="testPrintAgendaValid" classname="edu.sc.bse3211.meetingplanner.PersonTest" time="0.002"/>
+  <testcase name="testPrintAgendaDay" classname="edu.sc.bse3211.meetingplanner.PersonTest" time="0.001"/>
+  <testcase name="testPrintAgendaMonthWithMultipleDays" classname="edu.sc.bse3211.meetingplanner.PersonTest" time="0.001"/>
+  <testcase name="testAddMeetingWithEmptyAttendees" classname="edu.sc.bse3211.meetingplanner.PersonTest" time="0.001"/>
+  <testcase name="testAddBackToBackMeetings" classname="edu.sc.bse3211.meetingplanner.PersonTest" time="0.002"/>
+  <testcase name="testConstructorWithName" classname="edu.sc.bse3211.meetingplanner.PersonTest" time="0.001"/>
+  <testcase name="testGetName" classname="edu.sc.bse3211.meetingplanner.PersonTest" time="0.001"/>
+  <testcase name="testMultipleMeetings" classname="edu.sc.bse3211.meetingplanner.PersonTest" time="0.001"/>
+  <testcase name="testAddMeetingConflictDiagnostic" classname="edu.sc.bse3211.meetingplanner.PersonTest" time="0.009">
+    <failure message="Exception message should contain the person&apos;s name" type="java.lang.AssertionError">java.lang.AssertionError: Exception message should contain the person's name
+	at edu.sc.bse3211.meetingplanner.PersonTest.testAddMeetingConflictDiagnostic(PersonTest.java:185)
+</failure>
+  </testcase>
+  <testcase name="testRemoveMeeting" classname="edu.sc.bse3211.meetingplanner.PersonTest" time="0.001"/>
+  <testcase name="testEmptyAgenda" classname="edu.sc.bse3211.meetingplanner.PersonTest" time="0.002">
+    <failure message="Empty agenda should return an empty string" type="java.lang.AssertionError">java.lang.AssertionError: Empty agenda should return an empty string
+	at edu.sc.bse3211.meetingplanner.PersonTest.testEmptyAgenda(PersonTest.java:154)
+</failure>
+  </testcase>
+  <testcase name="testAddMeetingConflict" classname="edu.sc.bse3211.meetingplanner.PersonTest" time="0.001"/>
+  <testcase name="testPrintAgendaNoMeetings" classname="edu.sc.bse3211.meetingplanner.PersonTest" time="0.002"/>
+  <testcase name="testPrintAgendaFormat" classname="edu.sc.bse3211.meetingplanner.PersonTest" time="0"/>
+  <testcase name="testAddTwoNonConflictingMeetings" classname="edu.sc.bse3211.meetingplanner.PersonTest" time="0.005"/>
+  <testcase name="testGetMeeting" classname="edu.sc.bse3211.meetingplanner.PersonTest" time="0.001"/>
+  <testcase name="testIsBusy" classname="edu.sc.bse3211.meetingplanner.PersonTest" time="0.001"/>
+  <testcase name="testAddValidMeeting" classname="edu.sc.bse3211.meetingplanner.PersonTest" time="0.002"/>
+  <testcase name="testAddMeetingOnDifferentDay" classname="edu.sc.bse3211.meetingplanner.PersonTest" time="0.001"/>
+  <testcase name="testDefaultConstructor" classname="edu.sc.bse3211.meetingplanner.PersonTest" time="0.001"/>
+  <testcase name="testAddMeeting" classname="edu.sc.bse3211.meetingplanner.PersonTest" time="0"/>
 </testsuite>
