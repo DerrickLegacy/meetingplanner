@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report.xsd" name="edu.sc.bse3211.meetingplanner.CalendarTest" time="0.144" tests="1" errors="0" skipped="0" failures="0">
+<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report.xsd" name="edu.sc.bse3211.meetingplanner.RoomTest" time="0.025" tests="22" errors="8" skipped="0" failures="0">
   <properties>
     <property name="java.specification.version" value="24"/>
     <property name="sun.cpu.isalist" value="amd64"/>
@@ -59,5 +59,60 @@
     <property name="sun.io.unicode.encoding" value="UnicodeLittle"/>
     <property name="java.class.version" value="68.0"/>
   </properties>
-  <testcase name="testAddMeeting_holiday" classname="edu.sc.bse3211.meetingplanner.CalendarTest" time="0.029"/>
+  <testcase name="testRemoveNonExistentMeeting" classname="edu.sc.bse3211.meetingplanner.RoomTest" time="0">
+    <error message="Index 0 out of bounds for length 0" type="java.lang.IndexOutOfBoundsException">java.lang.IndexOutOfBoundsException: Index 0 out of bounds for length 0
+	at edu.sc.bse3211.meetingplanner.RoomTest.testRemoveNonExistentMeeting(RoomTest.java:148)
+</error>
+  </testcase>
+  <testcase name="testLastDayOfMonthMeeting" classname="edu.sc.bse3211.meetingplanner.RoomTest" time="0.001"/>
+  <testcase name="testInvalidMeetingParameters" classname="edu.sc.bse3211.meetingplanner.RoomTest" time="0"/>
+  <testcase name="testMidnightMeeting" classname="edu.sc.bse3211.meetingplanner.RoomTest" time="0"/>
+  <testcase name="testPrintAgendaMonth" classname="edu.sc.bse3211.meetingplanner.RoomTest" time="0">
+    <error message="Cannot invoke &quot;edu.sc.bse3211.meetingplanner.Room.getID()&quot; because &quot;this.room&quot; is null" type="java.lang.NullPointerException">java.lang.NullPointerException: Cannot invoke "edu.sc.bse3211.meetingplanner.Room.getID()" because "this.room" is null
+	at edu.sc.bse3211.meetingplanner.RoomTest.testPrintAgendaMonth(RoomTest.java:81)
+</error>
+  </testcase>
+  <testcase name="testPrintAgendaDay" classname="edu.sc.bse3211.meetingplanner.RoomTest" time="0">
+    <error message="Cannot invoke &quot;edu.sc.bse3211.meetingplanner.Room.getID()&quot; because &quot;this.room&quot; is null" type="java.lang.NullPointerException">java.lang.NullPointerException: Cannot invoke "edu.sc.bse3211.meetingplanner.Room.getID()" because "this.room" is null
+	at edu.sc.bse3211.meetingplanner.RoomTest.testPrintAgendaDay(RoomTest.java:90)
+</error>
+  </testcase>
+  <testcase name="testAddConflictingMeeting" classname="edu.sc.bse3211.meetingplanner.RoomTest" time="0">
+    <error message="Unexpected exception, expected&lt;edu.sc.bse3211.meetingplanner.TimeConflictException&gt; but was&lt;java.lang.NullPointerException&gt;" type="java.lang.Exception"><![CDATA[java.lang.Exception: Unexpected exception, expected<edu.sc.bse3211.meetingplanner.TimeConflictException> but was<java.lang.NullPointerException>
+	at edu.sc.bse3211.meetingplanner.RoomTest.testAddConflictingMeeting(RoomTest.java:45)
+]]></error>
+  </testcase>
+  <testcase name="testPartialOverlapMeeting" classname="edu.sc.bse3211.meetingplanner.RoomTest" time="0">
+    <error message="Unexpected exception, expected&lt;edu.sc.bse3211.meetingplanner.TimeConflictException&gt; but was&lt;java.lang.NullPointerException&gt;" type="java.lang.Exception"><![CDATA[java.lang.Exception: Unexpected exception, expected<edu.sc.bse3211.meetingplanner.TimeConflictException> but was<java.lang.NullPointerException>
+	at edu.sc.bse3211.meetingplanner.RoomTest.testPartialOverlapMeeting(RoomTest.java:186)
+]]></error>
+  </testcase>
+  <testcase name="testIsBusyWithMeeting" classname="edu.sc.bse3211.meetingplanner.RoomTest" time="0"/>
+  <testcase name="testRemoveMeeting" classname="edu.sc.bse3211.meetingplanner.RoomTest" time="0"/>
+  <testcase name="testConstructorWithID" classname="edu.sc.bse3211.meetingplanner.RoomTest" time="0"/>
+  <testcase name="testGetNonExistentMeeting" classname="edu.sc.bse3211.meetingplanner.RoomTest" time="0">
+    <error message="Index 0 out of bounds for length 0" type="java.lang.IndexOutOfBoundsException">java.lang.IndexOutOfBoundsException: Index 0 out of bounds for length 0
+	at edu.sc.bse3211.meetingplanner.RoomTest.testGetNonExistentMeeting(RoomTest.java:154)
+</error>
+  </testcase>
+  <testcase name="testEndOfDayMeeting" classname="edu.sc.bse3211.meetingplanner.RoomTest" time="0.002">
+    <error message="Conflict for room TestRoom:&#10;Illegal hour." type="edu.sc.bse3211.meetingplanner.TimeConflictException">edu.sc.bse3211.meetingplanner.TimeConflictException: 
+Conflict for room TestRoom:
+Illegal hour.
+	at edu.sc.bse3211.meetingplanner.RoomTest.testEndOfDayMeeting(RoomTest.java:124)
+</error>
+  </testcase>
+  <testcase name="testSameDayDifferentMonths" classname="edu.sc.bse3211.meetingplanner.RoomTest" time="0.001"/>
+  <testcase name="testIsBusyNoMeetings" classname="edu.sc.bse3211.meetingplanner.RoomTest" time="0.002"/>
+  <testcase name="testGetMeeting" classname="edu.sc.bse3211.meetingplanner.RoomTest" time="0.002"/>
+  <testcase name="testFirstDayOfMonthMeeting" classname="edu.sc.bse3211.meetingplanner.RoomTest" time="0.002"/>
+  <testcase name="testMultipleMeetingsDifferentDays" classname="edu.sc.bse3211.meetingplanner.RoomTest" time="0.001"/>
+  <testcase name="testExactSameTimeMeeting" classname="edu.sc.bse3211.meetingplanner.RoomTest" time="0.001">
+    <error message="Unexpected exception, expected&lt;edu.sc.bse3211.meetingplanner.TimeConflictException&gt; but was&lt;java.lang.NullPointerException&gt;" type="java.lang.Exception"><![CDATA[java.lang.Exception: Unexpected exception, expected<edu.sc.bse3211.meetingplanner.TimeConflictException> but was<java.lang.NullPointerException>
+	at edu.sc.bse3211.meetingplanner.RoomTest.testExactSameTimeMeeting(RoomTest.java:195)
+]]></error>
+  </testcase>
+  <testcase name="testAddValidMeeting" classname="edu.sc.bse3211.meetingplanner.RoomTest" time="0.001"/>
+  <testcase name="testDefaultConstructor" classname="edu.sc.bse3211.meetingplanner.RoomTest" time="0.001"/>
+  <testcase name="testSameTimeDifferentDays" classname="edu.sc.bse3211.meetingplanner.RoomTest" time="0.002"/>
 </testsuite>
