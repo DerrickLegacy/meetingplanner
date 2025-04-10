@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report.xsd" name="edu.sc.bse3211.meetingplanner.PersonTest" time="0.001" tests="2" errors="0" skipped="0" failures="1">
-<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report.xsd" name="edu.sc.bse3211.meetingplanner.PersonTest" time="0.001" tests="2" errors="0" skipped="0" failures="1">
+<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report.xsd" name="edu.sc.bse3211.meetingplanner.PersonTest" time="0" tests="2" errors="0" skipped="0" failures="0">
   <properties>
     <property name="java.specification.version" value="19"/>
     <property name="sun.cpu.isalist" value="amd64"/>
@@ -16,8 +15,8 @@
     <property name="java.vm.specification.version" value="19"/>
     <property name="sun.java.launcher" value="SUN_STANDARD"/>
     <property name="user.country" value="US"/>
-    <property name="sun.boot.library.path" value="C:\Program Files\Java\jdk-19\bin"/>
-    <property name="sun.java.command" value="C:\Users\HPPROB~1\AppData\Local\Temp\surefire16166291711113597172\surefirebooter9804910819029379804.jar C:\Users\HP PROBOOK\AppData\Local\Temp\surefire16166291711113597172 2025-04-10T20-03-31_397-jvmRun1 surefire1486596827378104158tmp surefire_02331752346689490860tmp"/>
+    <property name="sun.boot.library.path" value="/opt/jdk-24/lib"/>
+    <property name="sun.java.command" value="/home/derrick-legacy/Desktop/Software Testing Assignment/meetingplanner/meetingplanner/target/surefire/surefirebooter2964969172384757534.jar /home/derrick-legacy/Desktop/Software Testing Assignment/meetingplanner/meetingplanner/target/surefire 2025-04-08T11-39-57_691-jvmRun1 surefire14895247382866564002tmp surefire_0808489454327102628tmp"/>
     <property name="jdk.debug" value="release"/>
     <property name="surefire.test.class.path" value="c:\Users\HP PROBOOK\Desktop\meetingplanner\meetingplanner\target\test-classes;c:\Users\HP PROBOOK\Desktop\meetingplanner\meetingplanner\target\classes;C:\Users\HP PROBOOK\.m2\repository\junit\junit\4.11\junit-4.11.jar;C:\Users\HP PROBOOK\.m2\repository\org\hamcrest\hamcrest-core\1.3\hamcrest-core-1.3.jar;"/>
     <property name="sun.cpu.endian" value="little"/>
@@ -33,8 +32,8 @@
     <property name="java.vm.specification.vendor" value="Oracle Corporation"/>
     <property name="java.vm.specification.vendor" value="Oracle Corporation"/>
     <property name="java.specification.name" value="Java Platform API Specification"/>
-    <property name="surefire.real.class.path" value="C:\Users\HPPROB~1\AppData\Local\Temp\surefire16166291711113597172\surefirebooter9804910819029379804.jar"/>
-    <property name="user.script" value=""/>
+    <property name="java.vm.specification.vendor" value="Oracle Corporation"/>
+    <property name="surefire.real.class.path" value="/home/derrick-legacy/Desktop/Software Testing Assignment/meetingplanner/meetingplanner/target/surefire/surefirebooter2964969172384757534.jar"/>
     <property name="sun.management.compiler" value="HotSpot 64-Bit Tiered Compilers"/>
     <property name="java.runtime.version" value="19.0.1+10-21"/>
     <property name="user.name" value="HP PROBOOK"/>
@@ -61,15 +60,6 @@
     <property name="sun.io.unicode.encoding" value="UnicodeLittle"/>
     <property name="java.class.version" value="63.0"/>
   </properties>
-  <testcase name="testParameterizedConstructor" classname="edu.sc.bse3211.meetingplanner.PersonTest" time="0">
-    <failure message="expected:&lt;Alice[...]&gt; but was:&lt;Alice[]&gt;" type="org.junit.ComparisonFailure"><![CDATA[org.junit.ComparisonFailure: expected:<Alice[...]> but was:<Alice[]>
-	at edu.sc.bse3211.meetingplanner.PersonTest.testParameterizedConstructor(PersonTest.java:24)
-]]></failure>
-  </testcase>
-  <testcase name="testParameterizedConstructor" classname="edu.sc.bse3211.meetingplanner.PersonTest" time="0">
-    <failure message="expected:&lt;Alice[...]&gt; but was:&lt;Alice[]&gt;" type="org.junit.ComparisonFailure"><![CDATA[org.junit.ComparisonFailure: expected:<Alice[...]> but was:<Alice[]>
-	at edu.sc.bse3211.meetingplanner.PersonTest.testParameterizedConstructor(PersonTest.java:24)
-]]></failure>
-  </testcase>
+  <testcase name="testParameterizedConstructor" classname="edu.sc.bse3211.meetingplanner.PersonTest" time="0"/>
   <testcase name="testDefaultConstructor" classname="edu.sc.bse3211.meetingplanner.PersonTest" time="0"/>
 </testsuite>
